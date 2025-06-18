@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Sistema SASP - Guarda Civil Municipal de Guarulhos</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <script src="script.js"></script>
+</head>
+<body>
+  <div class="sidebar">
+    <h2>SASP<br><span>Guarda Civil Municipal de Guarulhos</span></h2>
+    <nav>
+      <ul>
+        <li id="btnOrdem"><i class="fa-solid fa-file-signature"></i> Ordem de Serviço</li>
+        <li><i class="fa-solid fa-calendar-check"></i> Resumo Diário</li>
+        <li><i class="fa-solid fa-clipboard-list"></i> Relatório Operacional</li>
+        <li><i class="fa fa-file-text" aria-hidden="true"></i> Escala Diária de Serviço</li>
+      </ul>
+    </nav>
+  </div>
+
+  <div class="conteudo">
+    <div id="conteudoInicial">
+      <h1>Bem-vindo ao Sistema de Relatórios</h1>
+      <p>Escolha uma das opções no menu lateral para começar a organizar os relatórios operacionais da GCM Guarulhos.</p>
+    </div>
+
+    <div id="formOrdem" style="display:none">
+      <h1>Ordem de Serviço</h1>
+      <form>
+
+        <div class="form-section">
+          <div class="cabecalho-os">
+  <h2>Dados da Ordem de Serviço</h2>
+  <div class="os-numero" id="numeroOrdemServico">O.S 00/25</div>
+</div>
+
+
+          <div class="form-group">
+            <label>Serviço:</label>
+            <input type="text">
+          </div>
+<div class="form-group">
+  <label>Endereço:</label>
+  <div class="row">
+    <div class="form-group small-group">
+      <label>CEP</label>
+      <div class="input-icon">
+        <input type="text" placeholder="00000-000">
+        <i class="fa-solid fa-magnifying-glass"></i>
+      </div>
+    </div>
+    <div class="form-group large-group">
+      <label>Rua</label>
+      <input type="text" placeholder="Nome da Rua">
+    </div>
+    <div class="form-group small-group">
+      <label>Nº</label>
+      <input type="text" placeholder="Número">
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="form-group medium-group">
+      <label>Bairro</label>
+      <input type="text" placeholder="Bairro">
+    </div>
+    <div class="form-group medium-group">
+      <label>Cidade</label>
+      <input type="text" placeholder="Cidade">
+    </div>
+    <div class="form-group small-group">
+      <label>UF</label>
+      <input type="text" placeholder="SP">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label>Ponto de Referência</label>
+    <input type="text" placeholder="Referência próxima">
+  </div>
+</div>
+
+          <div class="row">
+            <div class="form-group">
+              <label>Início:</label>
+              <input type="date">
+            </div>
+            <div class="form-group">
+              <label>Término:</label>
+              <input type="date">
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="form-group">
+              <label>Horário de Início:</label>
+              <input type="time">
+            </div>
+            <div class="form-group">
+              <label>Horário de Término:</label>
+              <input type="time">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Solicitante:</label>
+            <input type="text">
+          </div>
+
+          <div class="form-group">
+            <label>Telefone:</label>
+            <input type="text">
+          </div>
+
+          <div class="form-group">
+            <label>Órgão Solicitante:</label>
+            <input type="text">
+          </div>
+
+          <div class="form-group">
+            <label>Unidade(s) Destinatária(s):</label>
+            <select><option>Selecione</option></select>
+          </div>
+
+          <div class="form-group">
+            <label>Determinação para cobertura:</label>
+            <select>
+              <option>Selecione</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+  <label>Observações:</label>
+  <textarea id="observacaoInput" placeholder="Digite uma observação"></textarea>
+  <button type="button" class="btn-add" onclick="adicionarObservacao()">Adicionar Observação</button>
+  <ul id="listaObservacoes" class="observacoes-lista"></ul>
+</div>
+
+
+          <p>Guarulhos, <span id="dataAtual"></span></p>
+          <div class="botoes-acoes">
+  <button type="submit">Gerar Ordem de Serviço</button>
+  <i class="fa-solid fa-download download-icon" onclick="gerarPDF()" title="Baixar PDF"></i>
+</div>
+
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // mostrar data atual
+    const hoje = new Date();
+    document.getElementById("dataAtual").innerText = hoje.toLocaleDateString('pt-BR');
+
+    // clique no menu lateral
+    document.getElementById("btnOrdem").addEventListener("click", function () {
+      document.getElementById("conteudoInicial").style.display = "none";
+      document.getElementById("formOrdem").style.display = "block";
+      document.getElementById("btnOrdem").addEventListener("click", function () {
+  document.getElementById("conteudoInicial").style.display = "none";
+  document.getElementById("formOrdem").style.display = "block";
+  gerarNumeroOrdemServico();
+});
+
+    });
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+</body>
+</html>
