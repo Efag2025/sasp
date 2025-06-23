@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Sistema SASP - Guarda Civil Municipal de Guarulhos</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <style>
+    .form-section {
+      background: #fff;
+      padding: 30px;
+      border-radius: 8px;
+      margin-bottom: 30px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    .form-section h2, .form-section h3 {
+      color: #020141;
+      margin-bottom: 16px;
+      margin-top: 32px;
+    }
+    .form-group {
+      margin-bottom: 12px;
+    }
+    .form-group label {
+      display: block;
+      margin-bottom: 4px;
+      font-weight: 500;
+    }
+    .form-group input, .form-group textarea {
+      width: 100%;
+      padding: 8px 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    .row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .row .form-group {
+      flex: 1;
+      min-width: 200px;
+    }
+    button {
+      background: #020141;
+      color: #fff;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+    button:hover {
+      background: #ffc107;
+      color: #020141;
+    }
+    .form-group input[type="number"] {
+  width: 80px;
+}
+
+  </style>
+</head>
+<body>
+  <div class="sidebar">
+    <h2>SASP<br><span>Guarda Civil Municipal de Guarulhos</span></h2>
+    <nav>
+      <ul>
+        <li id="menuResumo"><i class="fa-solid fa-calendar-check"></i> Resumo Diário</li>
+        <li><i class="fa-solid fa-clipboard-list"></i> Relatório Operacional</li>
+        <li><i class="fa fa-file-text" aria-hidden="true"></i> Escala Diária de Serviço</li>
+      </ul>
+    </nav>
+  </div>
+
+  <div class="conteudo" id="conteudo">
+    <div id="conteudoInicial">
+      <h1>Bem-vindo ao Sistema de Relatórios</h1>
+      <p>Escolha uma das opções no menu lateral para começar a organizar os relatórios operacionais da GCM Guarulhos.</p>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById("menuResumo").addEventListener("click", () => {
+      document.getElementById("conteudo").innerHTML = `
+        <div class='form-section'>
+          <h2>Resumo Diário de Informações Quantitativas</h2>
+          <div class='row'>
+            <div class='form-group'><label>Inspetoria:</label><input type='text'></div>
+            <div class='form-group'><label>Plantão:</label><input type='text'></div>
+            <div class='form-group'><label>Data:</label><input type='date'></div>
+            <div class='form-group'><label>Efetivo Empregado:</label><input type='number'></div>
+            <div class='form-group'><label>Quant. VTR:</label><input type='number'></div>
+            <div class='form-group'><label>Quant. Motocicleta:</label><input type='number'></div>
+          </div>
+
+          <h3>PESSOAS</h3>
+          ${['Adolescentes apreendidos','Busca pessoal','Pessoas presas em flagrante','Procurados capturados','Prisão descumprindo medida protetiva']
+            .map(c => `<div class='form-group'><label>${c}:</label><input type='number'></div>`).join('')}
+
+          <h3>OCORRÊNCIAS</h3>
+          ${['Atendimento APP S.O.S. Patrulha Mulher','Atos infracionais','Condução a órgãos policiais','Desinteligências','Embriaguez','Estupros','Flagrantes','Furto (outros)','Furto de equipamento semafórico','Furto de fiação/cabos de cobre','Furto de veículos','Homicídios dolosos (vítimas)','Lesão corporal','Quantidade de ocorrências atendidas','Quantidade de telefonemas atendidos','Roubo (outros)','Roubo de veículos']
+            .map(c => `<div class='form-group'><label>${c}:</label><input type='number'></div>`).join('')}
+
+          <h3>VEÍCULOS</h3>
+          ${['Acid. trânsito com vítimas','Acid. trânsito sem vítimas','Atropelamentos','Autos de infração de trânsito','Carros recuperados','CNH recolhidas','Condutores abordados','Condutores autuados','Condutores que recusaram ao teste Bafômetro','Condutores submetidos ao teste Bafômetro','Motos recuperadas','Nº de AI confeccionados (ART. 165 CTB)','Quantidade flagrantes (ART. 306 CTB)','Veículos autuados','Veículos abordados','Veículos fiscalizados','Veículos removidos','Vítimas em acidentes de trânsito']
+            .map(c => `<div class='form-group'><label>${c}:</label><input type='number'></div>`).join('')}
+
+          <h3>ARMAS</h3>
+          ${['Armas brancas apreendidas','Armas de fogo apreendidas','Disparo de arma de fogo (exceto GCM)','Munição apreendida','Simulacro de arma de fogo']
+            .map(c => `<div class='form-group'><label>${c}:</label><input type='number'></div>`).join('')}
+
+          <h3>EVENTOS</h3>
+          ${['Eventos','Operações','Ordens de Serviços Atendidas']
+            .map(c => `<div class='form-group'><label>${c}:</label><input type='number'></div>`).join('')}
+
+          <h3>DROGAS</h3>
+          ${['Drogas apreendidas (kg)','Lança perfume (litros)','Porte/uso de entorpecentes','Tráfico de entorpecentes']
+            .map(c => `<div class='form-group'><label>${c}:</label><input type='number'></div>`).join('')}
+
+          <h3>INTERVENÇÃO / GCM</h3>
+          ${['Disparo de elastômero','Disparo de carabina','Disparo de espingarda','Disparo de fuzil','Disparo de pistola','Disparo de revólver','Disparo de taser','Granadas de Efeito Moral - utilizadas','Granadas de Efeito Moral - recolhidas','Granadas Lacrimogênea - utilizadas','Total de disparos de arma de fogo','Total de granadas utilizadas']
+            .map(c => `<div class='form-group'><label>${c}:</label><input type='number'></div>`).join('')}
+
+          <h3>AMBIENTAL</h3>
+          ${['Autos de infração ambiental','Descarte irregular de resíduos sólidos','Incêndio','Resgate de animais','Resgate de pessoas','Salvamento']
+            .map(c => `<div class='form-group'><label>${c}:</label><input type='number'></div>`).join('')}
+
+          <h3>APOIOS</h3>
+          ${['Apoio a Órgãos Municipais','Apoio a outras Forças de Segurança','Apoio à GCM','Auxílio a gestante','Auxílio ao público','Condução a PA / Hospital','Partos realizados']
+            .map(c => `<div class='form-group'><label>${c}:</label><input type='number'></div>`).join('')}
+
+          <h3>OBSERVAÇÕES</h3>
+          <div class='form-group'><textarea rows='4'></textarea></div>
+
+          <div class='row'>
+            <div class='form-group'><label>Responsável pelo Preenchimento:</label><input type='text'></div>
+            <div class='form-group'><label>C.F.:</label><input type='text'></div>
+          </div>
+
+          <button type='submit'>Salvar Resumo Diário</button>
+        </div>
+      `;
+    });
+  </script>
+</body>
+</html>
